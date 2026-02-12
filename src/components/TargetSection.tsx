@@ -41,7 +41,7 @@ const TargetSection = () => {
               Você aprenderá a Metodologia que transformou a comunicação de centenas de profissionais exatamente como você.
             </p>
             <p className="text-muted-foreground leading-relaxed mb-4">
-              São mais de [X] profissionais que saíram da invisibilidade e hoje ocupam espaços, palestram, lideram grupos e são respeitados por dominarem a oratória.
+              São centenas de profissionais que saíram da invisibilidade e hoje ocupam espaços, palestram, lideram grupos e são respeitados por dominarem a oratória.
             </p>
             <p className="text-primary font-semibold text-xl">
               E você será o próximo.
@@ -53,7 +53,6 @@ const TargetSection = () => {
         <AnimatedSection delay={0.5}>
           <div className="mt-12">
             <p className="text-center text-muted-foreground text-sm mb-6 italic">
-              [ EXEMPLO DE ESPAÇO PARA DEPOIMENTOS EM VÍDEO OU IMAGEM CASO TENHA]
             </p>
             <div className="grid md:grid-cols-2 gap-6">
               <blockquote className="border border-border rounded-lg p-6 bg-card">
@@ -61,14 +60,14 @@ const TargetSection = () => {
                   "Eu gravava 10 vezes e não postava nenhuma. Hoje eu gravo uma vez e posto com segurança.
                   A Maestria Speakers destravou algo em mim que eu nem sabia que estava preso."
                 </p>
-                <cite className="text-primary text-sm font-body not-italic">— [Nome], Coach</cite>
+                <cite className="text-primary text-sm font-body not-italic">— João Marcos de Oliveira, Coach</cite>
               </blockquote>
               <blockquote className="border border-border rounded-lg p-6 bg-card">
                 <p className="text-foreground italic text-sm mb-4">
                   "Eu perdia contratos porque não sabia me expressar. Depois da formação, minha comunicação mudou
                   completamente. Hoje sou chamado para palestrar."
                 </p>
-                <cite className="text-primary text-sm font-body not-italic">— [Nome], Terapeuta</cite>
+                <cite className="text-primary text-sm font-body not-italic">— Maria Cristina Souza, Terapeuta</cite>
               </blockquote>
             </div>
           </div>
