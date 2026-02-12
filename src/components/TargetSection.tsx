@@ -2,13 +2,13 @@ import AnimatedSection from "./AnimatedSection";
 
 const targets = [
   "É Coach, Terapeuta, Psicólogo ou Profissional do Desenvolvimento Humano que sente que tem mensagem, mas trava na hora de falar",
-  "Deseja se posicionar como autoridade, mas não consegue transmitir credibilidade",
+  "Deseja se posicionar como autoridade, mas não consegue transmitir credibilidade ao se comunicar",
   "Já tentou gravar conteúdos para redes sociais, mas não posta por medo de julgamento",
-  "Perde contratos, clientes e oportunidades porque outras pessoas sabem se expressar melhor",
+  "Perde contratos, clientes e oportunidades porque outras pessoas com menos conhecimento sabem se expressar melhor",
   "Quer dominar a oratória de forma prática, sem anos de teoria barata",
   "Sente que carrega uma mensagem forte demais para continuar travada",
   "Está cansado de ver pessoas com menos potencial ocupando os espaços que deveriam ser seus",
-  "Quer parar de ser 'mais um' e começar a ser lembrado e escolhido",
+  "Quer parar de ser \"mais um\" e começar a ser lembrado e escolhido",
 ];
 
 const TargetSection = () => {
@@ -16,11 +16,13 @@ const TargetSection = () => {
     <section className="section-dark-alt py-20 sm:py-28">
       <div className="max-w-4xl mx-auto px-4 sm:px-6">
         <AnimatedSection>
-          <h2 className="font-display text-3xl sm:text-4xl font-bold text-center mb-12">
+          <h2 className="font-display text-3xl sm:text-4xl font-bold text-center mb-4">
             Esta formação é para <span className="text-gradient-gold">você que:</span>
           </h2>
+          <p className="text-center text-lg text-muted-foreground mb-12">
+            Quer parar de perder oportunidades por não saber se expressar
+          </p>
         </AnimatedSection>
-
         <div className="grid sm:grid-cols-2 gap-4">
           {targets.map((t, i) => (
             <AnimatedSection key={i} delay={i * 0.05}>
@@ -31,7 +33,6 @@ const TargetSection = () => {
             </AnimatedSection>
           ))}
         </div>
-
         {/* Testimonials placeholder */}
         <AnimatedSection delay={0.4}>
           <div className="mt-14 grid md:grid-cols-2 gap-6">
