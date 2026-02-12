@@ -5,31 +5,86 @@ import AnimatedSection from "./AnimatedSection";
 const faqs = [
   {
     q: "Preciso ter experiência prévia em oratória ou palestras?",
-    a: "Não. A Maestria Speakers foi criada exatamente para quem trava ao falar, nunca palestrou ou sente dificuldade em se expressar com clareza. Você aprende do zero, com método prático e vivência real.",
+    a: "Não. A Maestria Speakers foi criada exatamente para quem trava ao falar, nunca palestrou ou sente dificuldade em se expressar com clareza. Você aprende do zero, com método prático, vivência real e correções ao vivo — não com teoria abstrata.",
   },
   {
-    q: "O que exatamente eu vou aprender?",
-    a: "Estrutura de fala clara e lógica, organização de ideias, presença de orador e postura de autoridade, como sustentar atenção e ser ouvido até o final. Tudo com prática, exposição e ajustes em tempo real.",
+    q: "O que exatamente eu vou aprender na Maestria Speakers?",
+    a: (
+      <>
+        <p className="mb-3">Você vai dominar os pilares da oratória aplicada à vida real, incluindo:</p>
+        <ul className="space-y-2 ml-4">
+          <li>• Estrutura de fala clara e lógica</li>
+          <li>• Organização de ideias para não se perder ao falar</li>
+          <li>• Presença de orador e postura de autoridade</li>
+          <li>• Como sustentar atenção e ser ouvido até o final</li>
+        </ul>
+        <p className="mt-3">Tudo isso falando de verdade, com prática, exposição e ajustes em tempo real.</p>
+      </>
+    ),
   },
   {
     q: "Como funciona o evento? É online ou presencial?",
-    a: "A Maestria Speakers é 100% presencial, nos dias 27 e 28 de fevereiro de 2026, em São José do Rio Preto – SP. As dinâmicas e práticas não funcionam online — a presença é indispensável.",
+    a: (
+      <>
+        <p className="mb-3">A Maestria Speakers é 100% presencial, nos dias 27 e 28 de fevereiro de 2026, em São José do Rio Preto – SP.</p>
+        <p>A transformação acontece porque você está presente. As dinâmicas, práticas e exposições não funcionam online — por isso, a presença é indispensável.</p>
+      </>
+    ),
   },
   {
     q: "Quais são as opções de pagamento?",
-    a: "Você pode parcelar em até 12x no cartão de crédito, ou pagar à vista no PIX, com desconto. Aceitamos todas as principais bandeiras.",
+    a: (
+      <>
+        <p className="mb-3">Você pode:</p>
+        <ul className="space-y-2 ml-4">
+          <li>• Parcelar em até 12x no cartão de crédito, ou</li>
+          <li>• Pagar à vista no PIX, com desconto</li>
+        </ul>
+        <p className="mt-3">Aceitamos todas as principais bandeiras.</p>
+      </>
+    ),
   },
   {
     q: "Terei suporte durante e depois da formação?",
-    a: "Sim. Além da experiência presencial, você terá acesso à Área de Membros Exclusiva com conteúdos complementares e à Comunidade de Oradores para troca e suporte contínuo.",
+    a: (
+      <>
+        <p className="mb-3">Sim. Além da experiência presencial, você terá acesso à:</p>
+        <ul className="space-y-2 ml-4">
+          <li>• Área de Membros Exclusiva, com conteúdos complementares</li>
+          <li>• Comunidade de Oradores, para troca, suporte e continuidade</li>
+        </ul>
+        <p className="mt-3">A formação não termina quando o evento acaba.</p>
+      </>
+    ),
   },
   {
     q: "Como funciona a Garantia Incondicional?",
-    a: "Você participa do primeiro dia completo. Se sentir que não é para você, basta solicitar o reembolso e devolveremos 100% do seu investimento. Sem perguntas, sem burocracia.",
+    a: (
+      <>
+        <p className="mb-3">Você participa do primeiro dia completo da Maestria Speakers. Se por qualquer motivo sentir que a formação não é para você, basta solicitar o reembolso e devolveremos 100% do seu investimento.</p>
+        <p className="mb-3">Sem perguntas. Sem burocracia. Sem constrangimento.</p>
+        <p>Oferecemos essa garantia porque sabemos o que acontece quando alguém vive a experiência de verdade. 👉 Quem entra no primeiro dia, não quer sair.</p>
+      </>
+    ),
   },
   {
-    q: "Qual a diferença entre o Acesso Essencial e o Maestro (VIP)?",
-    a: "Essencial: destrava a comunicação e aprende a estrutura de oratória. Maestro (VIP): além de tudo do Essencial, inclui mapeamento comportamental, reprogramação avançada, palestra estruturada pronta, gravação do evento, kit VIP e comunidade exclusiva.",
+    q: "Qual a diferença entre o Acesso Essencial e o Acesso Maestro (VIP)?",
+    a: (
+      <>
+        <p className="mb-3"><span className="font-semibold text-foreground">Essencial:</span> Você destrava a comunicação, aprende a estrutura de oratória e sai falando com mais clareza e segurança.</p>
+        <p className="mb-3"><span className="font-semibold text-foreground">Maestro (VIP):</span> Além de tudo do Essencial, você recebe:</p>
+        <ul className="space-y-2 ml-4 mb-3">
+          <li>• Mapeamento comportamental do orador</li>
+          <li>• Reprogramação avançada de bloqueios</li>
+          <li>• Mentoria de posicionamento como autoridade</li>
+          <li>• Palestra estruturada pronta</li>
+          <li>• Gravação do evento por 180 dias</li>
+          <li>• Prioridade nas práticas</li>
+          <li>• Kit VIP e comunidade exclusiva</li>
+        </ul>
+        <p>É para quem quer acelerar, se diferenciar e se posicionar como referência.</p>
+      </>
+    ),
   },
 ];
 
@@ -78,10 +133,18 @@ const FAQSection = () => {
         {/* Support CTA */}
         <AnimatedSection delay={0.4}>
           <div className="text-center mt-10">
-            <p className="text-muted-foreground mb-3">Ainda tem dúvidas?</p>
-            <a href="#" className="text-primary font-body font-semibold hover:underline">
+            <p className="text-muted-foreground mb-3">Ainda tem dúvidas? Nossa equipe está pronta para te ajudar.</p>
+            <a href="#" className="text-primary font-body font-semibold hover:underline inline-block mb-6">
               👉 FALAR COM SUPORTE
             </a>
+            <div>
+              
+                href="#inscricao"
+                className="inline-block bg-gradient-gold text-primary-foreground font-body font-bold text-lg px-8 py-4 rounded-lg hover:opacity-90 transition-opacity"
+              >
+                QUERO GARANTIR MINHA VAGA AGORA!
+              </a>
+            </div>
           </div>
         </AnimatedSection>
       </div>
