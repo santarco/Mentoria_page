@@ -132,16 +132,17 @@ const AgendaSection = () => {
           </div>
         </AnimatedSection>
 
-        <AnimatedSection delay={0.4}>
-          <div className="mt-8 text-center">
-            
-              href="#inscricao"
-              className="inline-block bg-gradient-gold text-primary-foreground font-body font-bold text-lg px-8 py-4 rounded-lg hover:opacity-90 transition-opacity"
-            >
-              QUERO GARANTIR MINHA VAGA!
-            </a>
-          </div>
-        </AnimatedSection>
+<AnimatedSection delay={0.4}>
+  <div className="mt-8 text-center">
+    <a
+      href="#inscricao"
+      className="inline-block bg-gradient-gold text-primary-foreground font-body font-bold text-lg px-8 py-4 rounded-lg hover:opacity-90 transition-opacity"
+    >
+      QUERO GARANTIR MINHA VAGA!
+    </a>
+  </div>
+</AnimatedSection>
+
       </div>
     </section>
   );
