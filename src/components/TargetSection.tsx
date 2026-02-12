@@ -1,0 +1,59 @@
+import AnimatedSection from "./AnimatedSection";
+
+const targets = [
+  "É Coach, Terapeuta, Psicólogo ou Profissional do Desenvolvimento Humano que sente que tem mensagem, mas trava na hora de falar",
+  "Deseja se posicionar como autoridade, mas não consegue transmitir credibilidade",
+  "Já tentou gravar conteúdos para redes sociais, mas não posta por medo de julgamento",
+  "Perde contratos, clientes e oportunidades porque outras pessoas sabem se expressar melhor",
+  "Quer dominar a oratória de forma prática, sem anos de teoria barata",
+  "Sente que carrega uma mensagem forte demais para continuar travada",
+  "Está cansado de ver pessoas com menos potencial ocupando os espaços que deveriam ser seus",
+  "Quer parar de ser 'mais um' e começar a ser lembrado e escolhido",
+];
+
+const TargetSection = () => {
+  return (
+    <section className="section-dark-alt py-20 sm:py-28">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6">
+        <AnimatedSection>
+          <h2 className="font-display text-3xl sm:text-4xl font-bold text-center mb-12">
+            Esta formação é para <span className="text-gradient-gold">você que:</span>
+          </h2>
+        </AnimatedSection>
+
+        <div className="grid sm:grid-cols-2 gap-4">
+          {targets.map((t, i) => (
+            <AnimatedSection key={i} delay={i * 0.05}>
+              <div className="flex items-start gap-3 p-4 rounded-lg border border-border bg-card hover:border-primary/30 transition-colors">
+                <span className="text-primary font-bold mt-0.5 shrink-0">✔</span>
+                <span className="text-muted-foreground text-sm">{t}</span>
+              </div>
+            </AnimatedSection>
+          ))}
+        </div>
+
+        {/* Testimonials placeholder */}
+        <AnimatedSection delay={0.4}>
+          <div className="mt-14 grid md:grid-cols-2 gap-6">
+            <blockquote className="border border-border rounded-lg p-6 bg-card">
+              <p className="text-foreground italic text-sm mb-4">
+                "Eu gravava 10 vezes e não postava nenhuma. Hoje eu gravo uma vez e posto com segurança.
+                A Maestria Speakers destravou algo em mim que eu nem sabia que estava preso."
+              </p>
+              <cite className="text-primary text-sm font-body not-italic">— Aluno(a), Coach</cite>
+            </blockquote>
+            <blockquote className="border border-border rounded-lg p-6 bg-card">
+              <p className="text-foreground italic text-sm mb-4">
+                "Eu perdia contratos porque não sabia me expressar. Depois da formação, minha comunicação mudou
+                completamente. Hoje sou chamado para palestrar."
+              </p>
+              <cite className="text-primary text-sm font-body not-italic">— Aluno(a), Terapeuta</cite>
+            </blockquote>
+          </div>
+        </AnimatedSection>
+      </div>
+    </section>
+  );
+};
+
+export default TargetSection;
