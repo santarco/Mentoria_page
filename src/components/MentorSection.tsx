@@ -11,7 +11,6 @@ const MentorSection = () => {
             <span className="text-gradient-gold">Deolane Paz</span>
           </h2>
         </AnimatedSection>
-
         <AnimatedSection delay={0.1}>
           <div className="grid md:grid-cols-[360px_1fr] gap-0 border border-border rounded-lg overflow-hidden bg-card">
             {/* Photo */}
@@ -26,14 +25,13 @@ const MentorSection = () => {
               {/* Gold accent line */}
               <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-gold z-20" />
             </div>
-
             {/* Bio */}
             <div className="p-8 sm:p-10 flex flex-col justify-center space-y-6">
               <div className="space-y-5 text-muted-foreground leading-relaxed">
                 <p>
                   Deolane Paz é referência nacional em formação de oradores e desenvolvimento de comunicação estratégica.
                   Treinadora de uma das maiores instituições de Desenvolvimento Humano do mundo e eleita{" "}
-                  <span className="text-primary font-semibold">Coach TOP 1 de Pernambuco</span> por anos consecutivos.
+                  <span className="text-primary font-semibold">Coach TOP 1 de Pernambuco</span> por anos consecutivos, ela transformou a forma como centenas de profissionais se comunicam e se posicionam no mercado.
                 </p>
                 <p>
                   Criadora do <span className="text-foreground font-medium">Método Destrava Coach</span> e do{" "}
@@ -41,12 +39,13 @@ const MentorSection = () => {
                   transformar profissionais invisíveis em autoridades reconhecidas — pessoas que não apenas falam bem,
                   mas que são ouvidas, respeitadas e escolhidas.
                 </p>
+                <p>
+                  Sua missão é clara: formar Maestros da Oratória que dominem a estrutura de discurso, presença e comunicação magnética, ocupando espaços que hoje perdem por não saber se expressar.
+                </p>
               </div>
-
               <blockquote className="text-foreground italic border-l-2 border-gold pl-4">
                 "Profissionais que não precisam gritar para serem ouvidos — porque quando falam, todos param para escutar."
               </blockquote>
-
               {/* Credentials badges */}
               <div className="flex flex-wrap gap-3 pt-2">
                 {["Coach TOP 1 PE", "Método Oratória Magnética™", "Treinadora Internacional"].map((badge) => (
