@@ -33,23 +33,55 @@ const TargetSection = () => {
             </AnimatedSection>
           ))}
         </div>
-        {/* Testimonials placeholder */}
+
+        {/* Transformation message */}
         <AnimatedSection delay={0.4}>
-          <div className="mt-14 grid md:grid-cols-2 gap-6">
-            <blockquote className="border border-border rounded-lg p-6 bg-card">
-              <p className="text-foreground italic text-sm mb-4">
-                "Eu gravava 10 vezes e não postava nenhuma. Hoje eu gravo uma vez e posto com segurança.
-                A Maestria Speakers destravou algo em mim que eu nem sabia que estava preso."
-              </p>
-              <cite className="text-primary text-sm font-body not-italic">— Aluno(a), Coach</cite>
-            </blockquote>
-            <blockquote className="border border-border rounded-lg p-6 bg-card">
-              <p className="text-foreground italic text-sm mb-4">
-                "Eu perdia contratos porque não sabia me expressar. Depois da formação, minha comunicação mudou
-                completamente. Hoje sou chamado para palestrar."
-              </p>
-              <cite className="text-primary text-sm font-body not-italic">— Aluno(a), Terapeuta</cite>
-            </blockquote>
+          <div className="mt-14 text-center max-w-3xl mx-auto">
+            <p className="text-foreground text-lg leading-relaxed mb-4">
+              Você aprenderá a Metodologia que transformou a comunicação de centenas de profissionais exatamente como você.
+            </p>
+            <p className="text-muted-foreground leading-relaxed mb-4">
+              São mais de [X] profissionais que saíram da invisibilidade e hoje ocupam espaços, palestram, lideram grupos e são respeitados por dominarem a oratória.
+            </p>
+            <p className="text-primary font-semibold text-xl">
+              E você será o próximo.
+            </p>
+          </div>
+        </AnimatedSection>
+
+        {/* Testimonials */}
+        <AnimatedSection delay={0.5}>
+          <div className="mt-12">
+            <p className="text-center text-muted-foreground text-sm mb-6 italic">
+              [ EXEMPLO DE ESPAÇO PARA DEPOIMENTOS EM VÍDEO OU IMAGEM CASO TENHA]
+            </p>
+            <div className="grid md:grid-cols-2 gap-6">
+              <blockquote className="border border-border rounded-lg p-6 bg-card">
+                <p className="text-foreground italic text-sm mb-4">
+                  "Eu gravava 10 vezes e não postava nenhuma. Hoje eu gravo uma vez e posto com segurança.
+                  A Maestria Speakers destravou algo em mim que eu nem sabia que estava preso."
+                </p>
+                <cite className="text-primary text-sm font-body not-italic">— [Nome], Coach</cite>
+              </blockquote>
+              <blockquote className="border border-border rounded-lg p-6 bg-card">
+                <p className="text-foreground italic text-sm mb-4">
+                  "Eu perdia contratos porque não sabia me expressar. Depois da formação, minha comunicação mudou
+                  completamente. Hoje sou chamado para palestrar."
+                </p>
+                <cite className="text-primary text-sm font-body not-italic">— [Nome], Terapeuta</cite>
+              </blockquote>
+            </div>
+          </div>
+        </AnimatedSection>
+
+        <AnimatedSection delay={0.6}>
+          <div className="mt-10 text-center">
+            
+              href="#inscricao"
+              className="inline-block bg-gradient-gold text-primary-foreground font-body font-bold text-lg px-8 py-4 rounded-lg hover:opacity-90 transition-opacity"
+            >
+              QUERO GARANTIR MINHA VAGA!
+            </a>
           </div>
         </AnimatedSection>
       </div>
