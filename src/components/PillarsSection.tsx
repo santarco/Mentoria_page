@@ -48,7 +48,6 @@ const PillarsSection = () => {
               {/* MOBILE GRID */}
               <div className="grid gap-4 sm:gap-6 lg:hidden">
                 <ResultCard />
-
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                   <PillarCard
                     index="01"
@@ -81,23 +80,23 @@ const PillarsSection = () => {
                 </div>
               </div>
 
-              {/* DESKTOP CIRCLE (FIXED: grid 2x2 with gap, no overlapping) */}
+              {/* DESKTOP CIRCLE (FIXED: more safe-area + smaller corner radius + circle typography) */}
               <div className="hidden lg:block relative mx-auto aspect-square max-w-3xl">
-                {/* Create stacking context */}
                 <div className="absolute inset-0 isolate">
-                  {/* Outer ring */}
+                  {/* Outer rings */}
                   <div className="absolute inset-0 rounded-full border border-primary/20" />
                   <div className="absolute inset-3 rounded-full border border-primary/10" />
 
-                  {/* QUADRANTS as GRID (no borders meeting in the center) */}
-                  <div className="absolute inset-6 rounded-full overflow-hidden">
-                    <div className="grid h-full w-full grid-cols-2 grid-rows-2 gap-6">
+                  {/* Quadrants inside circle */}
+                  <div className="absolute inset-10 xl:inset-12 rounded-full overflow-hidden">
+                    <div className="grid h-full w-full grid-cols-2 grid-rows-2 gap-7 xl:gap-8">
                       <PillarCard
                         index="01"
                         title="DESTRAVE"
                         subtitle="Elimine bloqueios emocionais"
                         Icon={IconUnlock}
-                        className="rounded-tl-[220px]"
+                        variant="circle"
+                        className="rounded-tl-[170px]"
                       />
 
                       <PillarCard
@@ -106,7 +105,8 @@ const PillarsSection = () => {
                         subtitle="Organize ideias com clareza"
                         Icon={IconStructure}
                         align="right"
-                        className="rounded-tr-[220px]"
+                        variant="circle"
+                        className="rounded-tr-[170px]"
                       />
 
                       <PillarCard
@@ -115,7 +115,8 @@ const PillarsSection = () => {
                         subtitle="Influencie e ocupe espaços"
                         Icon={IconCrown}
                         bottom
-                        className="rounded-bl-[220px]"
+                        variant="circle"
+                        className="rounded-bl-[170px]"
                       />
 
                       <PillarCard
@@ -125,33 +126,22 @@ const PillarsSection = () => {
                         Icon={IconMic}
                         align="right"
                         bottom
-                        className="rounded-br-[220px]"
+                        variant="circle"
+                        className="rounded-br-[170px]"
                       />
                     </div>
                   </div>
 
-                  {/* CONNECTORS */}
+                  {/* Connectors */}
                   <svg
                     className="absolute inset-0 h-full w-full pointer-events-none z-[5]"
                     viewBox="0 0 100 100"
                   >
                     <defs>
                       <linearGradient id="goldLine" x1="0" y1="0" x2="1" y2="1">
-                        <stop
-                          offset="0%"
-                          stopColor="#D4AF37"
-                          stopOpacity="0.55"
-                        />
-                        <stop
-                          offset="70%"
-                          stopColor="#D4AF37"
-                          stopOpacity="0.12"
-                        />
-                        <stop
-                          offset="100%"
-                          stopColor="#D4AF37"
-                          stopOpacity="0.0"
-                        />
+                        <stop offset="0%" stopColor="#D4AF37" stopOpacity="0.50" />
+                        <stop offset="70%" stopColor="#D4AF37" stopOpacity="0.12" />
+                        <stop offset="100%" stopColor="#D4AF37" stopOpacity="0.0" />
                       </linearGradient>
                       <marker
                         id="goldArrow"
@@ -164,43 +154,19 @@ const PillarsSection = () => {
                         <polygon
                           points="0 0, 7 3, 0 6"
                           fill="#D4AF37"
-                          opacity="0.45"
+                          opacity="0.40"
                         />
                       </marker>
                     </defs>
 
-                    {/* Start points pulled away from center so they don't touch the result */}
-                    <path
-                      d="M 24 24 L 42 42"
-                      stroke="url(#goldLine)"
-                      strokeWidth="0.6"
-                      fill="none"
-                      markerEnd="url(#goldArrow)"
-                    />
-                    <path
-                      d="M 76 24 L 58 42"
-                      stroke="url(#goldLine)"
-                      strokeWidth="0.6"
-                      fill="none"
-                      markerEnd="url(#goldArrow)"
-                    />
-                    <path
-                      d="M 76 76 L 58 58"
-                      stroke="url(#goldLine)"
-                      strokeWidth="0.6"
-                      fill="none"
-                      markerEnd="url(#goldArrow)"
-                    />
-                    <path
-                      d="M 24 76 L 42 58"
-                      stroke="url(#goldLine)"
-                      strokeWidth="0.6"
-                      fill="none"
-                      markerEnd="url(#goldArrow)"
-                    />
+                    {/* Keep away from center */}
+                    <path d="M 24 24 L 42 42" stroke="url(#goldLine)" strokeWidth="0.6" fill="none" markerEnd="url(#goldArrow)" />
+                    <path d="M 76 24 L 58 42" stroke="url(#goldLine)" strokeWidth="0.6" fill="none" markerEnd="url(#goldArrow)" />
+                    <path d="M 76 76 L 58 58" stroke="url(#goldLine)" strokeWidth="0.6" fill="none" markerEnd="url(#goldArrow)" />
+                    <path d="M 24 76 L 42 58" stroke="url(#goldLine)" strokeWidth="0.6" fill="none" markerEnd="url(#goldArrow)" />
                   </svg>
 
-                  {/* CENTER RESULT (always on top) */}
+                  {/* Center result */}
                   <div className="absolute inset-0 flex items-center justify-center z-[10]">
                     <div className="w-[38%] aspect-square rounded-full relative">
                       <div className="absolute inset-0 rounded-full bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.10),transparent_55%)]" />
@@ -266,6 +232,7 @@ function PillarCard({
   className = "",
   align = "left",
   bottom = false,
+  variant = "default",
 }: {
   index: string;
   title: string;
@@ -274,8 +241,10 @@ function PillarCard({
   className?: string;
   align?: "left" | "right";
   bottom?: boolean;
+  variant?: "default" | "circle";
 }) {
   const isRight = align === "right";
+  const isCircle = variant === "circle";
 
   return (
     <div
@@ -289,13 +258,15 @@ function PillarCard({
         className || "rounded-2xl",
       ].join(" ")}
     >
-      {/* premium highlight */}
+      {/* highlights */}
       <div className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-300 bg-[radial-gradient(circle_at_20%_10%,rgba(212,175,55,0.18),transparent_55%)]" />
-      <div className="pointer-events-none absolute -inset-10 opacity-25 bg-[conic-gradient(from_180deg,rgba(212,175,55,0.22),transparent_35%,rgba(212,175,55,0.12))] blur-2xl" />
+      <div className="pointer-events-none absolute -inset-10 opacity-20 bg-[conic-gradient(from_180deg,rgba(212,175,55,0.18),transparent_35%,rgba(212,175,55,0.10))] blur-2xl" />
 
       <div
         className={[
-          "relative h-full p-6 sm:p-8 flex flex-col",
+          "relative h-full flex flex-col",
+          // Safe padding: bigger in circle so text doesn't get clipped
+          isCircle ? "p-10 xl:p-12" : "p-6 sm:p-8",
           isRight ? "items-end text-right" : "items-start text-left",
           bottom ? "justify-end" : "justify-start",
         ].join(" ")}
@@ -309,16 +280,28 @@ function PillarCard({
           </p>
         </div>
 
-        <div className="mt-4">
-          <h3 className="font-display text-lg sm:text-2xl font-semibold text-foreground">
+        {/* Width cap prevents edge clipping + keeps it elegant */}
+        <div className={["mt-5", isRight ? "max-w-[20ch]" : "max-w-[22ch]"].join(" ")}>
+          <h3
+            className={[
+              "font-display font-semibold text-foreground leading-tight",
+              isCircle ? "text-xl xl:text-2xl" : "text-lg sm:text-2xl",
+            ].join(" ")}
+          >
             {title}
           </h3>
-          <p className="mt-1 text-xs sm:text-sm text-muted-foreground">
+
+          <p
+            className={[
+              "mt-2 text-muted-foreground leading-relaxed",
+              isCircle ? "text-sm xl:text-base" : "text-xs sm:text-sm",
+            ].join(" ")}
+          >
             {subtitle}
           </p>
         </div>
 
-        <div className="mt-6 h-px w-10 bg-primary/20" />
+        <div className="mt-7 h-px w-12 bg-primary/20" />
       </div>
     </div>
   );
