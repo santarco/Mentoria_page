@@ -58,20 +58,6 @@ const PricingSection = () => {
                   <li className="flex items-start gap-2">
                     <span className="text-primary flex-shrink-0">✓</span>
                     <span className="font-semibold text-foreground">
-                      Dinâmicas Práticas de Destrave Emocional
-                    </span>
-                  </li>
-
-                  <li className="flex items-start gap-2">
-                    <span className="text-primary flex-shrink-0">✓</span>
-                    <span className="font-semibold text-foreground">
-                      Avaliação do Orador
-                    </span>
-                  </li>
-
-                  <li className="flex items-start gap-2">
-                    <span className="text-primary flex-shrink-0">✓</span>
-                    <span className="font-semibold text-foreground">
                       Playbook Físico da Formação
                     </span>
                   </li>
