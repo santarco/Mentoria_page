@@ -20,8 +20,8 @@ interface LeadCaptureModalProps {
 }
 
 const CHECKOUT_URLS = {
-  normal: "https://payfast.greenn.com.br/151243/offer/N8Hg2d",
-  vip: "https://payfast.greenn.com.br/151243/offer/yId7TG",
+  normal: "https://chk.eduzz.com/q5awd7n3",
+  vip: "https://chk.eduzz.com/E9OODN1Q9B",
 } as const;
 
 /**
