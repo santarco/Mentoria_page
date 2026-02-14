@@ -97,12 +97,12 @@ const PricingSection = () => {
                   <p className="text-foreground text-lg font-body">
                     12x de{" "}
                     <span className="text-primary font-bold text-2xl">
-                      R$ 49,66
+                      R$ 72,09
                     </span>
                   </p>
                   <p className="text-muted-foreground text-sm">
                     Ou à vista por:{" "}
-                    <span className="text-foreground font-semibold">R$ 497</span>
+                    <span className="text-foreground font-semibold">R$ 697</span>
                   </p>
                 </div>
               </div>
@@ -199,7 +199,7 @@ const PricingSection = () => {
                   <p className="text-foreground text-lg font-body">
                     12x de{" "}
                     <span className="text-primary font-bold text-2xl">
-                      R$ 99,66
+                      R$ 103,11
                     </span>
                   </p>
                   <p className="text-muted-foreground text-sm">
