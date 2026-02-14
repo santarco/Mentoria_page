@@ -1,6 +1,7 @@
 import { useCallback, useState } from "react";
 import AnimatedSection from "./AnimatedSection";
-import LeadCaptureModal, { PricingOption } from "./LeadCaptureModal";
+import LeadCaptureModal, { PricingOption } from "@/components/ui/LeadCaptureModal";
+
 
 const PricingSection = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
