@@ -9,7 +9,6 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { ArrowRight, Loader2, X } from "lucide-react";
-import { trackInitiateCheckout } from "@/lib/facebook-pixel";
 import { useToast } from "@/hooks/use-toast";
 
 export type PricingOption = "normal" | "vip";
@@ -24,6 +23,27 @@ const CHECKOUT_URLS = {
   normal: "https://payfast.greenn.com.br/151243/offer/N8Hg2d",
   vip: "https://payfast.greenn.com.br/151243/offer/yId7TG",
 } as const;
+
+/**
+ * ✅ SAFE Pixel tracker:
+ * - Não depende de arquivo externo (evita ENOENT no build)
+ * - Nunca quebra o fluxo (checkout sempre segue)
+ * - Usa fbq global se existir
+ */
+const trackInitiateCheckoutSafe = async (value: number, currency: string) => {
+  try {
+    if (typeof window === "undefined") return;
+
+    // @ts-expect-error - fbq pode não existir
+    const fbq = window.fbq as undefined | ((...args: any[]) => void);
+
+    if (typeof fbq === "function") {
+      fbq("track", "InitiateCheckout", { value, currency });
+    }
+  } catch (e) {
+    console.warn("Pixel tracking failed:", e);
+  }
+};
 
 const LeadCaptureModal = ({ isOpen, onClose, option }: LeadCaptureModalProps) => {
   const [formData, setFormData] = useState({
@@ -106,8 +126,8 @@ const LeadCaptureModal = ({ isOpen, onClose, option }: LeadCaptureModalProps) =>
     try {
       await sendLeadToBackend(payload);
 
-      // ✅ Pixel
-      await trackInitiateCheckout(meta.pixelValue, "BRL");
+      // ✅ Pixel (safe)
+      await trackInitiateCheckoutSafe(meta.pixelValue, "BRL");
     } finally {
       // ✅ Sempre redireciona com dados do formulário
       const params = new URLSearchParams({
