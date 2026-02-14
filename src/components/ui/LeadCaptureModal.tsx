@@ -60,7 +60,7 @@ const LeadCaptureModal = ({ isOpen, onClose, option }: LeadCaptureModalProps) =>
         badge: "Plano recomendado",
         title: "Acesso Maestro VIP",
         subtitle: "Autoridade, diferenciação e aceleração real",
-        priceLine: "12x de R$ 99,66",
+        priceLine: "12x de R$ 103,11",
         cashLine: "Ou à vista por R$ 997",
         pixelValue: 97,
       };
@@ -70,8 +70,8 @@ const LeadCaptureModal = ({ isOpen, onClose, option }: LeadCaptureModalProps) =>
       badge: "Acesso essencial",
       title: "Acesso Essencial",
       subtitle: "Para destravar e começar a se posicionar",
-      priceLine: "12x de R$ 49,66",
-      cashLine: "Ou à vista por R$ 497",
+      priceLine: "12x de R$ 72,09",
+      cashLine: "Ou à vista por R$ 697",
       pixelValue: 37,
     };
   }, [option]);
