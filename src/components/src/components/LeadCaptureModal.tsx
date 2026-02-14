@@ -2,7 +2,12 @@ import React, { useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { ArrowRight, Loader2, X } from "lucide-react";
 import { trackInitiateCheckout } from "@/lib/facebook-pixel";
 import { useToast } from "@/hooks/use-toast";
@@ -21,7 +26,11 @@ const CHECKOUT_URLS = {
 } as const;
 
 const LeadCaptureModal = ({ isOpen, onClose, option }: LeadCaptureModalProps) => {
-  const [formData, setFormData] = useState({ nome: "", email: "", telefone: "" });
+  const [formData, setFormData] = useState({
+    nome: "",
+    email: "",
+    telefone: "",
+  });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
 
@@ -31,17 +40,18 @@ const LeadCaptureModal = ({ isOpen, onClose, option }: LeadCaptureModalProps) =>
         badge: "Plano recomendado",
         title: "Acesso Maestro VIP",
         subtitle: "Autoridade, diferenciação e aceleração real",
-        price: "12x de R$ 99,66",
-        cash: "Ou à vista por R$ 997",
+        priceLine: "12x de R$ 99,66",
+        cashLine: "Ou à vista por R$ 997",
         pixelValue: 97,
       };
     }
+
     return {
       badge: "Acesso essencial",
       title: "Acesso Essencial",
       subtitle: "Para destravar e começar a se posicionar",
-      price: "12x de R$ 49,66",
-      cash: "Ou à vista por R$ 497",
+      priceLine: "12x de R$ 49,66",
+      cashLine: "Ou à vista por R$ 497",
       pixelValue: 37,
     };
   }, [option]);
@@ -61,7 +71,10 @@ const LeadCaptureModal = ({ isOpen, onClose, option }: LeadCaptureModalProps) =>
           body: JSON.stringify(payload),
         }
       );
-      if (!response.ok) console.error("Error sending lead:", response.statusText);
+
+      if (!response.ok) {
+        console.error("Error sending lead:", response.statusText);
+      }
     } catch (err) {
       console.error("Error sending lead to webhook:", err);
     }
@@ -93,26 +106,27 @@ const LeadCaptureModal = ({ isOpen, onClose, option }: LeadCaptureModalProps) =>
     try {
       await sendLeadToBackend(payload);
 
-      // Pixel
+      // ✅ Pixel
       await trackInitiateCheckout(meta.pixelValue, "BRL");
     } finally {
-      // Redirect com params
+      // ✅ Sempre redireciona com dados do formulário
       const params = new URLSearchParams({
         fn: formData.nome.trim(),
         em: formData.email.trim(),
         ph: formData.telefone.trim(),
       });
+
       window.location.href = `${CHECKOUT_URLS[option]}?${params.toString()}`;
     }
   };
 
-  const closeAndReset = () => {
-    if (isSubmitting) return;
+  const closeModal = () => {
+    if (isSubmitting) return; // evita fechar no meio do submit
     onClose();
   };
 
   return (
-    <Dialog open={isOpen} onOpenChange={closeAndReset}>
+    <Dialog open={isOpen} onOpenChange={closeModal}>
       <DialogContent
         className={[
           "w-[calc(100%-1.5rem)] max-w-md mx-auto p-0 overflow-hidden",
@@ -123,15 +137,15 @@ const LeadCaptureModal = ({ isOpen, onClose, option }: LeadCaptureModalProps) =>
           "[&>button]:hidden",
         ].join(" ")}
       >
-        {/* Top glow */}
+        {/* Gold ambient */}
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_10%,rgba(212,175,55,0.16),transparent_55%)]" />
-        <div className="pointer-events-none absolute -top-24 left-1/2 h-64 w-64 -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(212,175,55,0.20),transparent_60%)] blur-2xl opacity-70" />
+        <div className="pointer-events-none absolute -top-24 left-1/2 h-64 w-64 -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(212,175,55,0.22),transparent_60%)] blur-2xl opacity-70" />
 
         {/* Header */}
         <div className="relative px-4 py-4 sm:px-6 sm:py-6 border-b border-primary/15">
-          {/* Close */}
+          {/* Custom close button */}
           <button
-            onClick={closeAndReset}
+            onClick={closeModal}
             disabled={isSubmitting}
             className={[
               "absolute right-2.5 top-2.5 sm:right-4 sm:top-4 z-10",
@@ -153,7 +167,7 @@ const LeadCaptureModal = ({ isOpen, onClose, option }: LeadCaptureModalProps) =>
               </span>
             </div>
 
-            <DialogTitle className="mt-3 font-display text-lg sm:text-2xl text-center text-foreground">
+            <DialogTitle className="mt-3 font-display text-lg sm:text-2xl text-foreground text-center">
               Confirme seus dados para continuar
             </DialogTitle>
 
@@ -162,6 +176,7 @@ const LeadCaptureModal = ({ isOpen, onClose, option }: LeadCaptureModalProps) =>
             </p>
           </DialogHeader>
 
+          {/* Selected plan */}
           <div className="mt-4 rounded-xl border border-primary/15 bg-black/25 p-4">
             <p className="text-[10px] uppercase tracking-[0.3em] text-primary/70">
               Plano selecionado
@@ -179,10 +194,10 @@ const LeadCaptureModal = ({ isOpen, onClose, option }: LeadCaptureModalProps) =>
 
               <div className="text-right">
                 <p className="font-display text-sm sm:text-base text-primary/90">
-                  {meta.price}
+                  {meta.priceLine}
                 </p>
                 <p className="text-[11px] sm:text-xs text-muted-foreground mt-1">
-                  {meta.cash}
+                  {meta.cashLine}
                 </p>
               </div>
             </div>
@@ -190,9 +205,15 @@ const LeadCaptureModal = ({ isOpen, onClose, option }: LeadCaptureModalProps) =>
         </div>
 
         {/* Form */}
-        <form onSubmit={handleSubmit} className="relative px-4 py-4 sm:px-6 sm:py-6 space-y-4">
+        <form
+          onSubmit={handleSubmit}
+          className="relative px-4 py-4 sm:px-6 sm:py-6 space-y-4"
+        >
           <div className="space-y-2">
-            <Label htmlFor="nome" className="font-body text-xs sm:text-sm text-foreground">
+            <Label
+              htmlFor="nome"
+              className="font-body text-xs sm:text-sm text-foreground"
+            >
               Nome
             </Label>
             <Input
@@ -215,7 +236,10 @@ const LeadCaptureModal = ({ isOpen, onClose, option }: LeadCaptureModalProps) =>
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="email" className="font-body text-xs sm:text-sm text-foreground">
+            <Label
+              htmlFor="email"
+              className="font-body text-xs sm:text-sm text-foreground"
+            >
               E-mail
             </Label>
             <Input
@@ -238,7 +262,10 @@ const LeadCaptureModal = ({ isOpen, onClose, option }: LeadCaptureModalProps) =>
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="telefone" className="font-body text-xs sm:text-sm text-foreground">
+            <Label
+              htmlFor="telefone"
+              className="font-body text-xs sm:text-sm text-foreground"
+            >
               Telefone
             </Label>
             <Input
@@ -265,7 +292,6 @@ const LeadCaptureModal = ({ isOpen, onClose, option }: LeadCaptureModalProps) =>
             disabled={isSubmitting}
             className={[
               "w-full h-11 sm:h-14 mt-2 group",
-              // Premium gold button
               "bg-[linear-gradient(135deg,#D4AF37,rgba(212,175,55,0.72))] text-black",
               "hover:opacity-95",
               "shadow-[0_0_0_1px_rgba(212,175,55,0.25),0_18px_50px_rgba(0,0,0,0.65)]",
