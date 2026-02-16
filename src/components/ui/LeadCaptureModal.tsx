@@ -20,8 +20,8 @@ interface LeadCaptureModalProps {
 }
 
 const CHECKOUT_URLS = {
-  normal: "https://chk.eduzz.com/q5awd7n3",
-  vip: "https://chk.eduzz.com/E9OODN1Q9B",
+  normal: "https://sun.eduzz.com/797735219E?nome=[field id="nome"]&email=[field id="email"]&cel=[field id="cel"]&utm_source=[field id="utm_source"]&utm_medium=[field id="utm_medium"]&utm_campaign=[field id="utm_campaign"]&utm_term=V1",
+  vip: "https://sun.eduzz.com/69KAJ2V80O?nome=[field id="nome"]&email=[field id="email"]&cel=[field id="cel"]&utm_source=[field id="utm_source"]&utm_medium=[field id="utm_medium"]&utm_campaign=[field id="utm_campaign"]&utm_term=V1",
 } as const;
 
 /**
@@ -84,7 +84,7 @@ const LeadCaptureModal = ({ isOpen, onClose, option }: LeadCaptureModalProps) =>
   const sendLeadToBackend = async (payload: Record<string, unknown>) => {
     try {
       const response = await fetch(
-        "https://services.leadconnectorhq.com/hooks/xjAS0N2qV5TNsYN8CTqX/webhook-trigger/17c1545f-45a6-42c9-aa82-5311a6390a10",
+        "https://services.leadconnectorhq.com/hooks/MlgLW6t9H3C4G9wRD6RI/webhook-trigger/wVQLMVeUaLLbCCPB93Gg",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
