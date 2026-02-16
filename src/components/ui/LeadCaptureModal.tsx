@@ -20,8 +20,8 @@ interface LeadCaptureModalProps {
 }
 
 const CHECKOUT_URLS = {
-  normal: "https://sun.eduzz.com/797735219E?nome=[field id="nome"]&email=[field id="email"]&cel=[field id="cel"]&utm_source=[field id="utm_source"]&utm_medium=[field id="utm_medium"]&utm_campaign=[field id="utm_campaign"]&utm_term=V1",
-  vip: "https://sun.eduzz.com/69KAJ2V80O?nome=[field id="nome"]&email=[field id="email"]&cel=[field id="cel"]&utm_source=[field id="utm_source"]&utm_medium=[field id="utm_medium"]&utm_campaign=[field id="utm_campaign"]&utm_term=V1",
+  normal: "https://sun.eduzz.com/797735219E",
+  vip: "https://sun.eduzz.com/69KAJ2V80O",
 } as const;
 
 /**
