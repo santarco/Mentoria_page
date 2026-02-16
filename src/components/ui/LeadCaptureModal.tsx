@@ -25,32 +25,37 @@ const CHECKOUT_URLS = {
 } as const;
 
 /**
- * ✅ SAFE Pixel tracker:
- * - Não depende de arquivo externo (evita ENOENT no build)
- * - Nunca quebra o fluxo (checkout sempre segue)
- * - Usa fbq global se existir
+ * Pixel seguro:
+ * Nunca quebra o fluxo de venda
  */
-const trackInitiateCheckoutSafe = async (value: number, currency: string) => {
+const trackInitiateCheckoutSafe = async (
+  value: number,
+  currency: string
+) => {
   try {
     if (typeof window === "undefined") return;
 
-    // @ts-expect-error - fbq pode não existir
-    const fbq = window.fbq as undefined | ((...args: any[]) => void);
-
-    if (typeof fbq === "function") {
-      fbq("track", "InitiateCheckout", { value, currency });
+    // @ts-ignore
+    if (typeof window.fbq === "function") {
+      // @ts-ignore
+      window.fbq("track", "InitiateCheckout", { value, currency });
     }
   } catch (e) {
     console.warn("Pixel tracking failed:", e);
   }
 };
 
-const LeadCaptureModal = ({ isOpen, onClose, option }: LeadCaptureModalProps) => {
+const LeadCaptureModal = ({
+  isOpen,
+  onClose,
+  option,
+}: LeadCaptureModalProps) => {
   const [formData, setFormData] = useState({
     nome: "",
     email: "",
     telefone: "",
   });
+
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
 
@@ -76,14 +81,21 @@ const LeadCaptureModal = ({ isOpen, onClose, option }: LeadCaptureModalProps) =>
     };
   }, [option]);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   };
 
-  const sendLeadToBackend = async (payload: Record<string, unknown>) => {
+  const sendLeadToBackend = async (
+    payload: Record<string, unknown>
+  ) => {
     try {
-      const response = await fetch(
+      await fetch(
         "https://services.leadconnectorhq.com/hooks/MlgLW6t9H3C4G9wRD6RI/webhook-trigger/wVQLMVeUaLLbCCPB93Gg",
         {
           method: "POST",
@@ -91,22 +103,21 @@ const LeadCaptureModal = ({ isOpen, onClose, option }: LeadCaptureModalProps) =>
           body: JSON.stringify(payload),
         }
       );
-
-      if (!response.ok) {
-        console.error("Error sending lead:", response.statusText);
-      }
     } catch (err) {
-      console.error("Error sending lead to webhook:", err);
+      console.error("Erro ao enviar lead:", err);
     }
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (
+    e: React.FormEvent<HTMLFormElement>
+  ) => {
     e.preventDefault();
 
     if (!formData.nome || !formData.email || !formData.telefone) {
       toast({
         title: "Preencha todos os campos",
-        description: "Por favor, preencha nome, email e telefone.",
+        description:
+          "Por favor, preencha nome, email e telefone.",
         variant: "destructive",
       });
       return;
@@ -125,15 +136,22 @@ const LeadCaptureModal = ({ isOpen, onClose, option }: LeadCaptureModalProps) =>
 
     try {
       await sendLeadToBackend(payload);
-
-      // ✅ Pixel (safe)
-      await trackInitiateCheckoutSafe(meta.pixelValue, "BRL");
+      await trackInitiateCheckoutSafe(
+        meta.pixelValue,
+        "BRL"
+      );
     } finally {
-      // ✅ Sempre redireciona com dados do formulário
       const params = new URLSearchParams({
-        fn: formData.nome.trim(),
-        em: formData.email.trim(),
-        ph: formData.telefone.trim(),
+        nome: formData.nome.trim(),
+        email: formData.email.trim(),
+        cel: formData.telefone.trim(),
+        utm_source: "site",
+        utm_medium: "modal",
+        utm_campaign:
+          option === "vip"
+            ? "maestro_vip"
+            : "maestria_essencial",
+        utm_term: "V1",
       });
 
       window.location.href = `${CHECKOUT_URLS[option]}?${params.toString()}`;
@@ -141,85 +159,63 @@ const LeadCaptureModal = ({ isOpen, onClose, option }: LeadCaptureModalProps) =>
   };
 
   const closeModal = () => {
-    if (isSubmitting) return; // evita fechar no meio do submit
-    onClose();
+    if (!isSubmitting) onClose();
   };
 
   return (
     <Dialog open={isOpen} onOpenChange={closeModal}>
       <DialogContent
-        className={[
-          "w-[calc(100%-1.5rem)] max-w-md mx-auto p-0 overflow-hidden",
-          "max-h-[85svh] overflow-y-auto rounded-xl sm:rounded-2xl",
-          // Premium black/gold
-          "bg-[#070708] text-foreground border border-primary/20",
-          "shadow-[0_0_0_1px_rgba(212,175,55,0.10),0_35px_120px_rgba(0,0,0,0.85)]",
-          "[&>button]:hidden",
-        ].join(" ")}
+        className="
+        w-[calc(100%-1.5rem)] max-w-md mx-auto p-0
+        max-h-[85svh] overflow-y-auto
+        rounded-2xl
+        bg-[#070708]
+        border border-primary/20
+        shadow-[0_0_0_1px_rgba(212,175,55,0.15),0_40px_120px_rgba(0,0,0,0.9)]
+        [&>button]:hidden
+      "
       >
-        {/* Gold ambient */}
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_10%,rgba(212,175,55,0.16),transparent_55%)]" />
-        <div className="pointer-events-none absolute -top-24 left-1/2 h-64 w-64 -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(212,175,55,0.22),transparent_60%)] blur-2xl opacity-70" />
-
         {/* Header */}
-        <div className="relative px-4 py-4 sm:px-6 sm:py-6 border-b border-primary/15">
-          {/* Custom close button */}
+        <div className="relative px-6 py-6 border-b border-primary/15">
           <button
             onClick={closeModal}
             disabled={isSubmitting}
-            className={[
-              "absolute right-2.5 top-2.5 sm:right-4 sm:top-4 z-10",
-              "rounded-full p-1.5",
-              "bg-black/40 border border-primary/20",
-              "opacity-80 hover:opacity-100 transition",
-              "focus:outline-none focus:ring-2 focus:ring-primary/40 focus:ring-offset-0",
-              isSubmitting ? "cursor-not-allowed opacity-40" : "",
-            ].join(" ")}
+            className="absolute right-4 top-4 rounded-full p-2 bg-black/40 border border-primary/20 hover:opacity-80 transition"
           >
-            <X className="h-4 w-4 text-primary/90" />
-            <span className="sr-only">Fechar</span>
+            <X className="h-4 w-4 text-primary" />
           </button>
 
           <DialogHeader>
-            <div className="flex items-center justify-center">
-              <span className="inline-flex items-center rounded-full border border-primary/25 bg-black/30 px-3 py-1 text-[10px] tracking-[0.35em] uppercase text-primary/80">
+            <div className="flex justify-center">
+              <span className="text-xs uppercase tracking-widest text-primary/80">
                 {meta.badge}
               </span>
             </div>
 
-            <DialogTitle className="mt-3 font-display text-lg sm:text-2xl text-foreground text-center">
-              Confirme seus dados para continuar
+            <DialogTitle className="mt-3 text-xl font-display text-center">
+              Confirme seus dados
             </DialogTitle>
 
-            <p className="font-body text-[11px] sm:text-sm text-muted-foreground text-center mt-1.5">
-              Você será direcionado(a) para o checkout em seguida.
+            <p className="text-sm text-muted-foreground text-center mt-2">
+              Você será direcionado ao checkout seguro.
             </p>
           </DialogHeader>
 
-          {/* Selected plan */}
-          <div className="mt-4 rounded-xl border border-primary/15 bg-black/25 p-4">
-            <p className="text-[10px] uppercase tracking-[0.3em] text-primary/70">
-              Plano selecionado
+          <div className="mt-6 border border-primary/15 rounded-xl p-4 bg-black/30">
+            <p className="text-sm text-primary font-semibold">
+              {meta.title}
+            </p>
+            <p className="text-xs text-muted-foreground mt-1">
+              {meta.subtitle}
             </p>
 
-            <div className="mt-2 flex items-start justify-between gap-4">
-              <div>
-                <p className="font-display text-base sm:text-lg text-foreground">
-                  {meta.title}
-                </p>
-                <p className="text-xs sm:text-sm text-muted-foreground mt-1">
-                  {meta.subtitle}
-                </p>
-              </div>
-
-              <div className="text-right">
-                <p className="font-display text-sm sm:text-base text-primary/90">
-                  {meta.priceLine}
-                </p>
-                <p className="text-[11px] sm:text-xs text-muted-foreground mt-1">
-                  {meta.cashLine}
-                </p>
-              </div>
+            <div className="mt-3 text-right">
+              <p className="text-primary font-semibold">
+                {meta.priceLine}
+              </p>
+              <p className="text-xs text-muted-foreground">
+                {meta.cashLine}
+              </p>
             </div>
           </div>
         </div>
@@ -227,82 +223,40 @@ const LeadCaptureModal = ({ isOpen, onClose, option }: LeadCaptureModalProps) =>
         {/* Form */}
         <form
           onSubmit={handleSubmit}
-          className="relative px-4 py-4 sm:px-6 sm:py-6 space-y-4"
+          className="px-6 py-6 space-y-4"
         >
-          <div className="space-y-2">
-            <Label
-              htmlFor="nome"
-              className="font-body text-xs sm:text-sm text-foreground"
-            >
-              Nome
-            </Label>
+          <div>
+            <Label htmlFor="nome">Nome</Label>
             <Input
               id="nome"
               name="nome"
               type="text"
-              placeholder="Seu nome completo"
               value={formData.nome}
               onChange={handleChange}
-              autoComplete="name"
-              disabled={isSubmitting}
-              className={[
-                "h-11 sm:h-12",
-                "bg-black/30 border-primary/20",
-                "focus-visible:ring-primary/35 focus-visible:border-primary/35",
-                "placeholder:text-muted-foreground/70",
-              ].join(" ")}
               required
             />
           </div>
 
-          <div className="space-y-2">
-            <Label
-              htmlFor="email"
-              className="font-body text-xs sm:text-sm text-foreground"
-            >
-              E-mail
-            </Label>
+          <div>
+            <Label htmlFor="email">E-mail</Label>
             <Input
               id="email"
               name="email"
               type="email"
-              placeholder="seu@email.com"
               value={formData.email}
               onChange={handleChange}
-              autoComplete="email"
-              disabled={isSubmitting}
-              className={[
-                "h-11 sm:h-12",
-                "bg-black/30 border-primary/20",
-                "focus-visible:ring-primary/35 focus-visible:border-primary/35",
-                "placeholder:text-muted-foreground/70",
-              ].join(" ")}
               required
             />
           </div>
 
-          <div className="space-y-2">
-            <Label
-              htmlFor="telefone"
-              className="font-body text-xs sm:text-sm text-foreground"
-            >
-              Telefone
-            </Label>
+          <div>
+            <Label htmlFor="telefone">Telefone</Label>
             <Input
               id="telefone"
               name="telefone"
               type="tel"
-              placeholder="(00) 00000-0000"
               value={formData.telefone}
               onChange={handleChange}
-              autoComplete="tel"
-              disabled={isSubmitting}
-              className={[
-                "h-11 sm:h-12",
-                "bg-black/30 border-primary/20",
-                "focus-visible:ring-primary/35 focus-visible:border-primary/35",
-                "placeholder:text-muted-foreground/70",
-              ].join(" ")}
               required
             />
           </div>
@@ -310,13 +264,12 @@ const LeadCaptureModal = ({ isOpen, onClose, option }: LeadCaptureModalProps) =>
           <Button
             type="submit"
             disabled={isSubmitting}
-            className={[
-              "w-full h-11 sm:h-14 mt-2 group",
-              "bg-[linear-gradient(135deg,#D4AF37,rgba(212,175,55,0.72))] text-black",
-              "hover:opacity-95",
-              "shadow-[0_0_0_1px_rgba(212,175,55,0.25),0_18px_50px_rgba(0,0,0,0.65)]",
-              "font-body font-bold tracking-wide",
-            ].join(" ")}
+            className="
+              w-full h-12
+              bg-gradient-to-r from-[#D4AF37] to-[#b9932f]
+              text-black font-bold
+              hover:opacity-90
+            "
           >
             {isSubmitting ? (
               <>
@@ -326,13 +279,13 @@ const LeadCaptureModal = ({ isOpen, onClose, option }: LeadCaptureModalProps) =>
             ) : (
               <>
                 Continuar para o pagamento
-                <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="ml-2 h-4 w-4" />
               </>
             )}
           </Button>
 
-          <p className="text-[10px] sm:text-xs text-muted-foreground text-center pt-1">
-            Seus dados estão seguros e não serão compartilhados.
+          <p className="text-xs text-muted-foreground text-center">
+            Seus dados estão protegidos.
           </p>
         </form>
       </DialogContent>
