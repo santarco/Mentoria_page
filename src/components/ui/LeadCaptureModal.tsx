@@ -75,8 +75,8 @@ const LeadCaptureModal = ({
       badge: "Acesso essencial",
       title: "Acesso Essencial",
       subtitle: "Para destravar e começar a se posicionar",
-      priceLine: "12x de R$ 72,09",
-      cashLine: "Ou à vista por R$ 697",
+      priceLine: "12x de R$ 51,40",
+      cashLine: "Ou à vista por R$ 497",
       pixelValue: 37,
     };
   }, [option]);
