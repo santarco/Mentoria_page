@@ -72,11 +72,11 @@ const LeadCaptureModal = ({
     }
 
     return {
-      badge: "Acesso essencial",
-      title: "Acesso Essencial",
+      badge: "Acesso Gold",
+      title: "Acesso Gold",
       subtitle: "Para destravar e começar a se posicionar",
-      priceLine: "12x de R$ 51,40",
-      cashLine: "Ou à vista por R$ 497",
+      priceLine: "12x de R$ 72,09",
+      cashLine: "Ou à vista por R$ 697",
       pixelValue: 37,
     };
   }, [option]);
@@ -150,7 +150,7 @@ const LeadCaptureModal = ({
         utm_campaign:
           option === "vip"
             ? "maestro_vip"
-            : "maestria_essencial",
+            : "maestria_Gold",
         utm_term: "V1",
       });
 
