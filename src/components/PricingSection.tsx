@@ -42,12 +42,12 @@ const PricingSection = () => {
         </AnimatedSection>
 
         <div className="grid md:grid-cols-2 gap-8">
-          {/* Essencial */}
+          {/* Gold */}
           <AnimatedSection delay={0.1}>
             <div className="border border-border rounded-lg bg-card flex flex-col h-full">
               <div className="p-8 flex-1">
                 <h3 className="font-display text-2xl font-bold mb-1">
-                  Acesso Essencial
+                  Acesso Gold
                 </h3>
                 <p className="text-muted-foreground text-sm mb-6">
                   Para quem quer destravar e começar a se posicionar
@@ -114,7 +114,7 @@ const PricingSection = () => {
                   onClick={() => openModal("normal")}
                   className="btn-gold-outline w-full text-center block"
                 >
-                  QUERO O ACESSO ESSENCIAL
+                  QUERO O ACESSO Gold
                 </button>
               </div>
             </div>
@@ -138,7 +138,7 @@ const PricingSection = () => {
                 </p>
 
                 <p className="text-xs text-primary font-body font-semibold mb-3 uppercase tracking-wide">
-                  Tudo do Plano Essencial, MAIS:
+                  Tudo do Plano Gold, MAIS:
                 </p>
 
                 <ul className="space-y-4 text-sm text-muted-foreground mb-8">
