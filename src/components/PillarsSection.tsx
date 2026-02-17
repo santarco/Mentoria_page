@@ -47,20 +47,20 @@ const PillarsSection = () => {
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                   <PillarCard
-                    index="01"
+                    index="03"
                     title="DESTRAVE"
                     subtitle="Elimine bloqueios emocionais"
                     Icon={IconUnlock}
                   />
                   <PillarCard
-                    index="02"
+                    index="01"
                     title="ESTRUTURA"
                     subtitle="Organize ideias com clareza"
                     Icon={IconStructure}
                     align="right"
                   />
                   <PillarCard
-                    index="03"
+                    index="02"
                     title="PRESENÇA"
                     subtitle="Comunique com autoridade"
                     Icon={IconMic}
