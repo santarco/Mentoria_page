@@ -17,7 +17,6 @@ const HeroSection = () => {
 
   const bgAnim = useMemo(() => {
     if (reduceMotion) return {};
-    // Ken Burns suave: zoom + micro pan (cinematic)
     return {
       initial: { scale: 1.06, x: 0, y: 0 },
       animate: { scale: 1.12, x: -10, y: 6 },
@@ -30,7 +29,10 @@ const HeroSection = () => {
       {/* Background */}
       <div className="absolute inset-0">
         {/* Image (responsive + LCP optimized) */}
-        <motion.div className="absolute inset-0" {...bgAnim}>
+        <motion.div
+          className="absolute inset-0 brightness-110 contrast-105"
+          {...bgAnim}
+        >
           <picture>
             {/* Desktop */}
             <source media="(min-width: 768px)" srcSet={heroDesktop} />
@@ -46,34 +48,25 @@ const HeroSection = () => {
           </picture>
         </motion.div>
 
-        {/* Cinematic overlays */}
-        {/* Base dark wash */}
-        <div className="absolute inset-0 bg-black/70" />
+        {/* ✅ Overlays (mais claros e premium) */}
+        {/* Base dark wash (reduzido) */}
+        <div className="absolute inset-0 bg-black/45" />
 
-        {/* Premium vignette (edges darker) */}
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,rgba(0,0,0,0.15),rgba(0,0,0,0.78)_70%)]" />
+        {/* Vignette suave */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_45%,rgba(0,0,0,0.10),rgba(0,0,0,0.55)_75%)]" />
 
-        {/* Gold glow accent (subtle, top-left / center) */}
-        <div className="absolute -top-32 left-1/2 h-[520px] w-[520px] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(212,175,55,0.18),transparent_60%)] blur-3xl opacity-80" />
-        <div className="absolute -bottom-48 right-[-120px] h-[520px] w-[520px] rounded-full bg-[radial-gradient(circle,rgba(212,175,55,0.10),transparent_60%)] blur-3xl opacity-60" />
+        {/* Gold glow leve */}
+        <div className="absolute -top-24 left-1/2 h-[420px] w-[420px] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(212,175,55,0.15),transparent_65%)] blur-3xl opacity-70" />
+        <div className="absolute -bottom-52 right-[-140px] h-[520px] w-[520px] rounded-full bg-[radial-gradient(circle,rgba(212,175,55,0.10),transparent_60%)] blur-3xl opacity-60" />
 
-        {/* Vertical gradient to ground content */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/55 to-transparent" />
-
-        {/* Grain texture (very subtle) */}
-        <div
-          className="absolute inset-0 opacity-[0.10] mix-blend-overlay pointer-events-none"
-          style={{
-            backgroundImage:
-              "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.25'/%3E%3C/svg%3E\")",
-          }}
-        />
+        {/* Gradiente inferior sutil */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/35 to-transparent" />
       </div>
 
       {/* Content */}
       <div className="relative z-10 w-full">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 text-center py-24 sm:py-28">
-          {/* Top bar: premium availability */}
+          {/* Availability */}
           <motion.div
             initial={reduceMotion ? false : { opacity: 0, y: -16 }}
             animate={reduceMotion ? undefined : { opacity: 1, y: 0 }}
@@ -95,7 +88,9 @@ const HeroSection = () => {
               Vagas disponíveis:
               <s className="text-muted-foreground/70 tabular-nums">70</s>
               <span className="text-foreground/90">→</span>
-              <span className="font-semibold text-primary tabular-nums">{vagas}</span>
+              <span className="font-semibold text-primary tabular-nums">
+                {vagas}
+              </span>
             </span>
           </motion.div>
 
@@ -118,12 +113,13 @@ const HeroSection = () => {
               "font-display",
               "text-3xl sm:text-4xl md:text-5xl lg:text-6xl",
               "font-bold leading-[1.08] mb-8",
-              // subtle text shadow for legibility on any bg
               "[text-shadow:0_10px_30px_rgba(0,0,0,0.65)]",
             ].join(" ")}
           >
             Domine a Oratória em 2 Dias e Transforme sua Comunicação em{" "}
-            <span className="text-gradient-gold">Autoridade, Contratos e Oportunidades</span>
+            <span className="text-gradient-gold">
+              Autoridade, Contratos e Oportunidades
+            </span>
           </motion.h1>
 
           {/* Sub-headline */}
@@ -133,8 +129,9 @@ const HeroSection = () => {
             transition={{ delay: 0.42, duration: 0.7, ease: "easeOut" }}
             className="font-body text-base sm:text-lg text-muted-foreground max-w-3xl mx-auto mb-10 leading-relaxed"
           >
-            Saia preparado para falar em público e nas redes sociais com clareza, segurança e presença,
-            mesmo que hoje você trave, sue frio na hora de falar ou tenha sido ignorado a vida toda.
+            Saia preparado para falar em público e nas redes sociais com clareza,
+            segurança e presença, mesmo que hoje você trave, sue frio na hora de
+            falar ou tenha sido ignorado a vida toda.
           </motion.p>
 
           {/* CTA */}
